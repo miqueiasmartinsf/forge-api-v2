@@ -16,9 +16,11 @@ Esse projeto trata-se de um gerenciador de treinos, aonde o usuário pode criar 
 
 ## 🛠️ Construído com
 
-- [Express](https://expressjs.com/pt-br) - framework para criação de aplicativos web.
+- [Express](https://expressjs.com/pt-br) - Framework para criação de aplicativos web.
 - [Prettier](https://prettier.io) - Formatador de código que mantém um estilo de código consistente.
 - [Bcrypt](https://github.com/kelektiv/node.bcrypt.js) - é uma biblioteca de hash de senhas
+- [Mongoose](https://expressjs.com/pt-br) - ORM para MongoDB
+- [MongoDB](https://prettier.io) - Banco de dados não relacional
 
 ## Colaboradores 🤝🤝
 
