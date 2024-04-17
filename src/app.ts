@@ -1,5 +1,4 @@
 import express from "express";
-import { logger } from "./middlewares/logger";
 
 import { router as authRouter } from "./routes/authRoutes";
 
@@ -10,4 +9,3 @@ app.get("/", (req, res) => {
 });
 
 app.use(authRouter);
-app.use(logger);
