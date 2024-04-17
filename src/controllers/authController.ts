@@ -7,7 +7,7 @@ type controllerParam = {
 
 export class authController {
 
-    static login({req,res}:controllerParam){
+    static async login(req:Request){
         console.log(req);
     }
 
