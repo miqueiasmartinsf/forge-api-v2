@@ -1,22 +1,14 @@
-import mongoose from "mongoose";
-import { Schema } from "mongoose";
-
-export interface User {
-    id?: string;
-    name: string;
-    email: string;
-    password: string;
-    confirmPassword?:string;
-    profilePic?: string;
-}
+import mongoose, { Schema, Document, InferSchemaType } from "mongoose";
 
 export const userSchema = new Schema({
-    id: String,
+    id: {type:String, unique:true},
     name: String,
-    email: String,
+    email: {type:String, unique:true},
     password: String,
     profilePic: String,
-    createdAt: { type: Date, default: Date.now },
+    createdAt: { type: Date, default: Date.now, required:false },
 });
 
-export const UserModel = mongoose.model('users',userSchema);
+export type User = InferSchemaType<typeof userSchema>;
+
+export const UserModel = mongoose.model<User>("users", userSchema);

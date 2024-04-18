@@ -1,12 +1,15 @@
-import { UserModel } from "../models/User";
+import { User, UserModel } from "../models/User";
 
+export class UserRepository {
+    static async loadUserByEmail(email: string): Promise<User> {
+        const res = await UserModel.findOne({ email: email });
 
-export class UserRepository{
+        console.log(res);
 
-    static async loadUser() {
-
-        const data = await UserModel.exists({})
-        
-
+        return {
+            name: res?.email,
+            email: res?.email,
+            password: res?.password,
+        };
     }
 }
