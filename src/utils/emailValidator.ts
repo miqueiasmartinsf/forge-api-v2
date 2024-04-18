@@ -1,4 +1,3 @@
-
-const emailRegEx = /^[a-z0-9.]+@[a-z0-9]+\.[a-z]+\.([a-z]+)?$/i;
+const emailRegEx = /^\S+@\S+\.\S+$/
 
 export const emailValidator = (email:string) => emailRegEx.test(email);

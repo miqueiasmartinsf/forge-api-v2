@@ -8,8 +8,10 @@ export class authRepository{
 
         const user = new UserModel(userData);
 
+        const query = await user.save();
 
-        
+        return query;
+
     }
 
 }
