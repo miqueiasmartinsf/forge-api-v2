@@ -5,8 +5,13 @@ import { authRepository } from "../repositories/authRepository";
 import { UserRepository } from "../repositories/userRepository";
 import bcrypt from "bcrypt";
 import { User } from "../models/User";
-import * as httpError from "http-errors";
 import jsonwebtoken from "jsonwebtoken";
+import {
+    EmailInUseError,
+    UserNotFound,
+    InvalidEmail,
+    AuthenticationError,
+} from "../errors/httpError";
 
 export class AuthController {
     static async login(req: Request, res: Response) {
@@ -27,13 +32,13 @@ export class AuthController {
                     { id: userData.id },
                     `${privateKey}`
                 );
-
-                res.json({ message: "sucess", authToken: token }).status(200);
+                
+                res.status(200).json({ message: "sucess", authToken: token });
             } else {
-                res.json({ message: "Incorrect password" });
+                res.status(400).json(new UserNotFound());
             }
         } else {
-            res.json({ message: "User not registered" });
+            res.status(400).json(new UserNotFound());
             return;
         }
     }
@@ -45,13 +50,13 @@ export class AuthController {
 
         try {
             if (!emailValidator(email)) {
-                res.json({ message: "Invalid email address" }).status(400);
+                res.status(400).json(new InvalidEmail());
                 return;
             } else if (password !== confirmPassword) {
-                res.json({ message: "Passwords does not match" }).status(400);
+                res.status(400).json(new AuthenticationError());
                 return;
             } else if (userExists) {
-                res.json({ message: "Email already in use" });
+                res.status(400).json(new EmailInUseError());
                 return;
             }
 
@@ -65,10 +70,13 @@ export class AuthController {
 
             const repositoryRes = await authRepository.createUser(user);
 
-            res.json({ message: "User created with sucess" }).status(200);
+            res.status(200).json({
+                message: "User created with sucess",
+                auth: true,
+            });
         } catch (error) {
             if (error instanceof MongoError) {
-                res.json(error.message).status(400);
+                res.status(400).json(error.message);
             }
         }
     }

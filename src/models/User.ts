@@ -2,12 +2,12 @@ import { ObjectId } from "mongodb";
 import mongoose, { Schema, Document, InferSchemaType } from "mongoose";
 
 export const userSchema = new Schema({
-    id: String,
+    id: { type: String },
     name: String,
-    email: {type:String, unique:true},
-    password: String,
+    email: { type: String, unique: true },
+    password: { type: String, minLength: 5 },
     profilePic: String,
-    createdAt: { type: Date, default: Date.now, required:false },
+    createdAt: { type: Date, default: Date.now, required: false },
 });
 
 export type User = InferSchemaType<typeof userSchema>;
