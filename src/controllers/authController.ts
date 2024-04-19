@@ -32,8 +32,12 @@ export class AuthController {
                     { id: userData.id },
                     `${privateKey}`
                 );
-                
-                res.status(200).json({ message: "sucess", authToken: token });
+
+                res.status(200).json({
+                    message: "sucess",
+                    authToken: token,
+                    auth: true,
+                });
             } else {
                 res.status(400).json(new UserNotFound());
             }

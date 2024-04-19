@@ -1,5 +1,4 @@
-import { ObjectId } from "mongodb";
-import mongoose, { Schema, Document, InferSchemaType } from "mongoose";
+import mongoose, { Schema, InferSchemaType } from "mongoose";
 
 export const userSchema = new Schema({
     id: { type: String },
