@@ -6,11 +6,7 @@ import { UserRepository } from "../repositories/userRepository";
 import bcrypt from "bcrypt";
 import { User } from "../models/User";
 import * as httpError from "http-errors";
-
-type controllerParam = {
-    req: Request;
-    res: Response;
-};
+import jsonwebtoken from "jsonwebtoken";
 
 export class AuthController {
     static async login(req: Request, res: Response) {
@@ -25,7 +21,14 @@ export class AuthController {
             );
 
             if (passwordVerify === true) {
-                res.json({ message: "sucess" }).status(200);
+                const privateKey = process.env.JWT_SECRET_KEY;
+
+                const token = jsonwebtoken.sign(
+                    { id: userData.id },
+                    `${privateKey}`
+                );
+
+                res.json({ message: "sucess", authToken: token }).status(200);
             } else {
                 res.json({ message: "Incorrect password" });
             }
@@ -38,7 +41,7 @@ export class AuthController {
     static async register(req: Request, res: Response) {
         let { name, email, password, confirmPassword } = req.body;
 
-        const userExists = await UserRepository.loadUserByEmail(email);
+        const userExists = await UserRepository.userExists(email);
 
         try {
             if (!emailValidator(email)) {
