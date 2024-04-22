@@ -4,8 +4,6 @@ export class UserRepository {
     static async loadUserByEmail(email: string): Promise<User> {
         const res = await UserModel.findOne({ email: email });
 
-        console.log(res);
-
         return {
             id: res?.id,
             name: res?.email,

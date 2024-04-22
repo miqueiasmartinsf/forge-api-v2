@@ -6,6 +6,8 @@ export const exerciseSchema = new Schema({
     muscularGroup: String,
     muscularGroupId:String,
     description:String,
+    imageUrl:String,
+    gifUrl:String,
     createdAt: { type: Date, default: Date.now, required: false },
 });
 
