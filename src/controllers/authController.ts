@@ -17,33 +17,39 @@ export class AuthController {
     static async login(req: Request, res: Response) {
         let { email, password } = req.body;
 
-        const userData = await UserRepository.loadUserByEmail(email);
+        try {
+            const userData = await UserRepository.loadUserByEmail(email);
 
-        if (userData && userData.password) {
-            const passwordVerify = await bcrypt.compare(
-                password,
-                userData.password
-            );
-
-            if (passwordVerify === true) {
-                const privateKey = process.env.JWT_SECRET_KEY;
-
-                const token = jsonwebtoken.sign(
-                    { id: userData.id },
-                    `${privateKey}`
+            if (userData && userData.password) {
+                const passwordVerify = await bcrypt.compare(
+                    password,
+                    userData.password
                 );
 
-                res.status(200).json({
-                    message: "sucess",
-                    authToken: token,
-                    auth: true,
-                });
+                if (passwordVerify === true) {
+                    const privateKey = process.env.JWT_SECRET_KEY;
+
+                    const token = jsonwebtoken.sign(
+                        { id: userData.id },
+                        `${privateKey}`
+                    );
+
+                    res.status(200).json({
+                        message: "sucess",
+                        authToken: token,
+                        auth: true,
+                    });
+                } else {
+                    res.status(400).json(new UserNotFound());
+                }
             } else {
                 res.status(400).json(new UserNotFound());
+                return;
             }
-        } else {
-            res.status(400).json(new UserNotFound());
-            return;
+        } catch (error) {
+            if (error instanceof MongoError) {
+                res.status(400).json(error.message);
+            }
         }
     }
 
