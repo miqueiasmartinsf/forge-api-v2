@@ -18,3 +18,4 @@ app.get("/", (req, res) => {
 app.use(authRouter);
 app.use(exerciseRouter);
 
+

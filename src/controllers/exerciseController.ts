@@ -3,7 +3,16 @@ import { ExerciseRepository } from "../repositories/exerciseRepository";
 import { MongoError } from "mongodb";
 
 export class ExerciseController {
-    static async index(req: Request, res: Response) {}
+    static async index(req: Request, res: Response) {
+        try {
+            const response = await ExerciseRepository.findAll();
+            res.status(200).json(response);
+        } catch (error) {
+            if (error instanceof MongoError) {
+                res.status(400).json(error.message);
+            }
+        }
+    }
 
     static async showById(req: Request, res: Response) {
         const { id } = req.params;
