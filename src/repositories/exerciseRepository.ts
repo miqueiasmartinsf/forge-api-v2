@@ -8,6 +8,12 @@ export class ExerciseRepository {
 
     static async findById(id: string) {
         const res = await ExerciseModel.findById(id);
+        return res;
+    }
+
+    static async findByMuscularGroupId(id: string) {
+        const res = await ExerciseModel.find({ muscularGroupId: id });
+        return res;
     }
 
     static async create(exerciseData: Exercise) {

@@ -16,6 +16,26 @@ export class ExerciseController {
 
     static async showById(req: Request, res: Response) {
         const { id } = req.params;
+        try {
+            const response = await ExerciseRepository.findById(id);
+            res.status(200).json(response);
+        } catch (error) {
+            if (error instanceof MongoError) {
+                res.status(400).json(error.message);
+            }
+        }
+    }
+
+    static async showByMuscularGroupId(req: Request, res: Response) {
+        let { id } = req.params;
+        try {
+            const response = await ExerciseRepository.findByMuscularGroupId(id);
+            res.status(200).json(response);
+        } catch (error) {
+            if (error instanceof MongoError) {
+                res.status(400).json(error.message);
+            }
+        }
     }
 
     static async storage(req: Request, res: Response) {
