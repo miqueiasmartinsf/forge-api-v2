@@ -16,6 +16,13 @@ export class ExerciseRepository {
         return res;
     }
 
+    static async findByQuerySearch(query: string) {
+        const res = await ExerciseModel.find({
+            $or: [{ name: { $regex: query } }],
+        });
+        return res;
+    }
+
     static async create(exerciseData: Exercise) {
         const exercise = new ExerciseModel(exerciseData);
         const query = await exercise.save();

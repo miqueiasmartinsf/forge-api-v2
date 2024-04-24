@@ -38,6 +38,18 @@ export class ExerciseController {
         }
     }
 
+    static async showByQuerySearch(req: Request, res: Response) {
+        const { query } = req.params;
+        try {
+            const response = await ExerciseRepository.findByQuerySearch(query);
+            res.status(200).json(response);
+        } catch (error) {
+            if (error instanceof MongoError) {
+                res.status(400).json(error.message);
+            }
+        }
+    }
+
     static async storage(req: Request, res: Response) {
         const {
             name,
