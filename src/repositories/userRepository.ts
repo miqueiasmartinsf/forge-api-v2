@@ -1,7 +1,8 @@
 import { User, UserModel } from "../models/User";
+import mongoose from "mongoose";
 
 export class UserRepository {
-    static async loadUserByEmail(email: string): Promise<User> {
+    static async findByUserByEmail(email: string): Promise<User> {
         const res = await UserModel.findOne({ email: email });
 
         return {
@@ -9,6 +10,17 @@ export class UserRepository {
             name: res?.email,
             email: res?.email,
             password: res?.password,
+        };
+    }
+
+    static async findByUserId(id: string) {
+        const res = await UserModel.findById(id);
+        return {
+            _id: res?._id,
+            name: res?.email,
+            email: res?.email,
+            profilePic: res?.profilePic,
+            createdAt: res?.createdAt,
         };
     }
 

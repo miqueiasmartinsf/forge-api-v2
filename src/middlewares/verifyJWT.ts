@@ -9,7 +9,6 @@ export const verifyJWT = (req: Request, res: Response, next: NextFunction) => {
         if (token) {
             jsonwebtoken.verify(token, <string>privateKey, (error, decoded) => {
                 if (error) return res.status(401).json(new UnauthorizedError());
-                console.log(decoded);
                 next();
             });
         } else {

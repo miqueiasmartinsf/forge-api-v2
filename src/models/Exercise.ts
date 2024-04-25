@@ -1,7 +1,7 @@
 import mongoose, { Schema, InferSchemaType } from "mongoose";
 
 export const exerciseSchema = new Schema({
-    id: { type: String },
+    _id: { type: String },
     name: String,
     muscularGroup: String,
     muscularGroupId: String,

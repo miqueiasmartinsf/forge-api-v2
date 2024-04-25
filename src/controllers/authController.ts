@@ -18,7 +18,7 @@ export class AuthController {
         let { email, password } = req.body;
 
         try {
-            const userData = await UserRepository.loadUserByEmail(email);
+            const userData = await UserRepository.findByUserByEmail(email);
 
             if (userData && userData.password) {
                 const passwordVerify = await bcrypt.compare(
