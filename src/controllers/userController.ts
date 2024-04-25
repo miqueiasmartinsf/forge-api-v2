@@ -1,4 +1,3 @@
-import { User } from "../models/User";
 import { Request, Response } from "express";
 import jsonwebtoken from "jsonwebtoken";
 import { JwtPayload } from "jsonwebtoken";
