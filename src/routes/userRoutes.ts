@@ -1,6 +1,11 @@
 import express from "express";
+import { verifyJWT } from "../middlewares/verifyJWT";
+import { UserController } from "../controllers/userController";
+
 export const router = express.Router();
 
-router.get("/user",() => {});
-router.get("/user/email",() => {});
+router.use(verifyJWT);
 
+router.get("/user", UserController.showUser);
+router.get("/users", () => {});
+router.get("/user/email", () => {});

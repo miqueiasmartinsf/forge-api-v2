@@ -28,11 +28,9 @@ export class AuthController {
 
                 if (passwordVerify === true) {
                     const privateKey = process.env.JWT_SECRET_KEY;
-
-                    const token = jsonwebtoken.sign(
-                        { id: userData.id },
-                        `${privateKey}`
-                    );
+                    const id = userData._id;
+                    console.log(userData);
+                    const token = jsonwebtoken.sign({ id }, `${privateKey}`);
 
                     res.status(200).json({
                         message: "sucess",

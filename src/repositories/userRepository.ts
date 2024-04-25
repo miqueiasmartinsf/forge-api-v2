@@ -5,7 +5,7 @@ export class UserRepository {
         const res = await UserModel.findOne({ email: email });
 
         return {
-            id: res?.id,
+            _id: res?._id,
             name: res?.email,
             email: res?.email,
             password: res?.password,
