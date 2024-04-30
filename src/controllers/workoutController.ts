@@ -1,10 +1,8 @@
-import { Workout } from "../models/Workout";
 import { Request, Response } from "express";
 import { WorkoutRepository } from "../repositories/workoutRepository";
 import { MongoError, ObjectId } from "mongodb";
 import { JwtPayload } from "jsonwebtoken";
 import jsonwebtoken from "jsonwebtoken";
-import mongoose from "mongoose";
 
 export class WorkoutController {
     static async showByUserId(req: Request, res: Response) {
@@ -12,6 +10,18 @@ export class WorkoutController {
             const token = req.headers["authorization"] as string;
             const decoded = <JwtPayload>jsonwebtoken.decode(token);
             const response = await WorkoutRepository.findByUserId(decoded.id);
+            res.status(200).json({ response });
+        } catch (error) {
+            if (error instanceof MongoError) {
+                res.status(400).json(error.message);
+            }
+        }
+    }
+
+    static async showByWorkoutId(req: Request, res: Response) {
+        try {
+            const { id } = req.params;
+            const response = await WorkoutRepository.findByWorkoutId(id);
             res.status(200).json({ response });
         } catch (error) {
             if (error instanceof MongoError) {
@@ -31,7 +41,7 @@ export class WorkoutController {
             const response = await WorkoutRepository.create({
                 title,
                 description,
-                userId
+                userId,
             });
 
             console.log(response);
