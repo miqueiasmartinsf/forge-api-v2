@@ -2,10 +2,9 @@ import { ObjectId } from "mongodb";
 import mongoose, { Schema, InferSchemaType } from "mongoose";
 
 export const workoutSchema = new Schema({
-    _id: { type: ObjectId },
     title: String,
     description: { type: String },
-    userId: { type: ObjectId },
+    userId: { type: ObjectId, ref: "users" },
     createdAt: { type: Date, default: Date.now, required: false },
 });
 

@@ -1,9 +1,10 @@
 import { Workout } from "../models/Workout";
 import { Request, Response } from "express";
 import { WorkoutRepository } from "../repositories/workoutRepository";
-import { MongoError } from "mongodb";
+import { MongoError, ObjectId } from "mongodb";
 import { JwtPayload } from "jsonwebtoken";
 import jsonwebtoken from "jsonwebtoken";
+import mongoose from "mongoose";
 
 export class WorkoutController {
     static async showByUserId(req: Request, res: Response) {
@@ -20,14 +21,20 @@ export class WorkoutController {
     }
 
     static async storage(req: Request, res: Response) {
-        const { title, description, userId } = req.body;
+        const { title, description } = req.body;
 
+        const token = req.headers["authorization"] as string;
+        const decoded = <JwtPayload>jsonwebtoken.decode(token);
+        const userId = decoded.id;
+        console.log(`TOKEN ID: ${userId}`);
         try {
             const response = await WorkoutRepository.create({
                 title,
                 description,
-                userId,
+                userId
             });
+
+            console.log(response);
 
             res.status(200).json({
                 message: "sucess",

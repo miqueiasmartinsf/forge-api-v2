@@ -8,8 +8,14 @@ export class WorkoutRepository {
     }
 
     static async create(workoutData: Workout) {
-        const workout = new WorkoutModel(workoutData);
-        const query = await workout.save();
-        return query;
+        try {
+            const workout = new WorkoutModel(workoutData);
+            console.log(workout);
+            const query = await workout.save();
+            console.log(query);
+            return query;
+        } catch (error) {
+            console.log(error);
+        }
     }
 }
