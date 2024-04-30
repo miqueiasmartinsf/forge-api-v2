@@ -26,6 +26,7 @@ export class SetController {
                 workoutId,
                 exercises,
             });
+            res.status(200).json(response);
         } catch (error) {
             if (error instanceof MongoError) {
                 res.status(400).json(error.message);

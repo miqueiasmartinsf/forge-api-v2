@@ -5,6 +5,7 @@ const SetExerciesSchema = new Schema({
     exerciseId: ObjectId,
     repetitions: Number,
     sets: Number,
+    createdAt: { type: Date, default: Date.now, required: false },
 });
 
 export const setSchema = new Schema({
