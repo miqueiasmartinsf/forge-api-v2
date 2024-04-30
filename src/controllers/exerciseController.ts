@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { ExerciseRepository } from "../repositories/exerciseRepository";
-import { MongoError } from "mongodb";
+import { MongoError, ObjectId } from "mongodb";
 
 export class ExerciseController {
     static async index(req: Request, res: Response) {
