@@ -5,9 +5,12 @@ import { SetRepository } from "../repositories/setRepository";
 export class SetController {
     static async showByWorkoutId(req: Request, res: Response) {
         const { id } = req.params;
-
         try {
             const response = await SetRepository.findByWorkoutId(id);
+
+            res.status(200).json({
+                setData: response,
+            });
         } catch (error) {
             if (error instanceof MongoError) {
                 res.status(400).json(error.message);

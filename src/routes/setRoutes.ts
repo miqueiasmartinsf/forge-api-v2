@@ -6,5 +6,5 @@ export const router = express.Router();
 
 router.use(verifyJWT);
 
-router.get("/sets", SetController.showByWorkoutId);
+router.get("/sets/:id", SetController.showByWorkoutId);
 router.post("/sets", SetController.storage);
