@@ -5,6 +5,7 @@ import { SetRepository } from "../repositories/setRepository";
 export class SetController {
     static async showByWorkoutId(req: Request, res: Response) {
         const { id } = req.params;
+        console.log(`workoutID: ${id}`);
         try {
             const response = await SetRepository.findByWorkoutId(id);
 
