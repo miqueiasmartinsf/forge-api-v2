@@ -20,7 +20,6 @@ export class WorkoutRepository {
             console.log(query);
             return query;
         } catch (error) {
-            console.log(error);
         }
     }
 
