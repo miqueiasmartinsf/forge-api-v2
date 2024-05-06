@@ -11,4 +11,9 @@ export class SetRepository {
         const set = new SetModel(setData);
         const query = await set.save();
     }
+
+    static async deleteByWorkoutId(id:string){
+        const query = await SetModel.deleteMany({workoutId:id});
+        return query;
+    }
 }

@@ -8,7 +8,6 @@ export class SetController {
         console.log(`workoutID: ${id}`);
         try {
             const response = await SetRepository.findByWorkoutId(id);
-
             res.status(200).json({
                 setData: response,
             });
@@ -34,4 +33,6 @@ export class SetController {
             }
         }
     }
+
+    
 }
