@@ -23,4 +23,9 @@ export class WorkoutRepository {
             console.log(error);
         }
     }
+
+    static async deleteById(id:string){
+        const query = await WorkoutModel.findByIdAndDelete(id);
+        return query;
+    }
 }
