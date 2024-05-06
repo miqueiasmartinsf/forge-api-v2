@@ -1,3 +1,4 @@
+import { ObjectId } from "mongoose";
 import { Exercise, ExerciseModel, exerciseSchema } from "../models/Exercise";
 
 export class ExerciseRepository {
@@ -7,7 +8,9 @@ export class ExerciseRepository {
     }
 
     static async findById(id: string) {
-        const res = await ExerciseModel.findById(id);
+        console.log(id);
+        const res = await ExerciseModel.findOne({ _id: id });
+        console.log(res);
         return res;
     }
 

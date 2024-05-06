@@ -5,6 +5,8 @@ import { router as authRouter } from "./routes/authRoutes";
 import { router as exerciseRouter } from "./routes/exerciseRoutes";
 import { router as userRouter } from "./routes/userRoutes";
 import { router as workoutRoutes } from "./routes/WorkoutRoutes";
+import { router as setRoutes } from "./routes/setRoutes";
+
 import { logger } from "./middlewares/logger";
 
 export const app = express();
@@ -21,4 +23,4 @@ app.use(authRouter);
 app.use(exerciseRouter);
 app.use(userRouter);
 app.use(workoutRoutes);
-
+app.use(setRoutes);

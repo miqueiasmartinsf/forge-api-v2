@@ -1,7 +1,8 @@
+import { ObjectId } from "mongodb";
 import mongoose, { Schema, InferSchemaType } from "mongoose";
 
 export const exerciseSchema = new Schema({
-    _id: { type: String },
+    _id: { type: ObjectId },
     name: String,
     muscularGroup: String,
     muscularGroupId: String,

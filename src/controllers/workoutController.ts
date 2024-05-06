@@ -36,7 +36,6 @@ export class WorkoutController {
         const token = req.headers["authorization"] as string;
         const decoded = <JwtPayload>jsonwebtoken.decode(token);
         const userId = decoded.id;
-        console.log(`TOKEN ID: ${userId}`);
         try {
             const response = await WorkoutRepository.create({
                 title,
@@ -44,10 +43,9 @@ export class WorkoutController {
                 userId,
             });
 
-            console.log(response);
-
             res.status(200).json({
                 message: "sucess",
+                id: response?._id
             });
         } catch (error) {
             if (error instanceof MongoError) {
