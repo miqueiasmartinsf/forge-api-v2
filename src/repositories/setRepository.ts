@@ -8,7 +8,9 @@ export class SetRepository {
     }
 
     static async create(setData: Set) {
+        console.log(setData)
         const set = new SetModel(setData);
+        console.log(set);
         const query = await set.save();
     }
 

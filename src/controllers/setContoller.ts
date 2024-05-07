@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { MongoError } from "mongodb";
+import { MongoError, ObjectId } from "mongodb";
 import { SetRepository } from "../repositories/setRepository";
 
 export class SetController {
@@ -19,9 +19,13 @@ export class SetController {
     }
 
     static async storage(req: Request, res: Response) {
-        const { workoutId, exercises } = req.body;
+        const { workoutId, setExercisesIds } = req.body;
 
         try {
+            const exercises = setExercisesIds.map((item:string) => {
+                return new ObjectId(item);
+            })
+            console.log(exercises);
             const response = await SetRepository.create({
                 workoutId,
                 exercises,
