@@ -20,7 +20,11 @@ export class WorkoutRepository {
             console.log(query);
             return query;
         } catch (error) {
-            console.log(error);
         }
+    }
+
+    static async deleteById(id:string){
+        const query = await WorkoutModel.findByIdAndDelete(id);
+        return query;
     }
 }

@@ -1,17 +1,17 @@
 import { ObjectId } from "mongodb";
 import mongoose, { Schema, InferSchemaType } from "mongoose";
-import { exerciseSchema } from "./Exercise";
+import { exerciseSchema, Exercise } from "./Exercise";
 
 const SetExerciesSchema = new Schema({
-    exerciseId: exerciseSchema,
+    exercise: exerciseSchema,
     repetitions: Number,
     sets: Number,
-    createdAt: { type: Date, default: Date.now, required: false },
 });
 
 export const setSchema = new Schema({
     exercisesData: [{ type: SetExerciesSchema, ref: "exercises" }],
     workoutId: { type: ObjectId, ref: "workouts" },
+    createdAt: { type: Date, default: Date.now, required: false },
 });
 
 

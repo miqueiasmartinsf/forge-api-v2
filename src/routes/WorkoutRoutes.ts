@@ -9,3 +9,4 @@ router.use(verifyJWT);
 router.get("/workouts", WorkoutController.showByUserId);
 router.get("/workouts/:id", WorkoutController.showByWorkoutId);
 router.post("/workouts", WorkoutController.storage);
+router.delete("/workouts/:id", WorkoutController.deleteById);

@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { MongoError } from "mongodb";
+import { MongoError, ObjectId } from "mongodb";
 import { SetRepository } from "../repositories/setRepository";
 import { ExerciseRepository } from "../repositories/exerciseRepository";
 import { Exercise } from "../models/Exercise";
@@ -15,7 +15,6 @@ export class SetController {
         console.log(`workoutID: ${id}`);
         try {
             const response = await SetRepository.findByWorkoutId(id);
-
             res.status(200).json({
                 setData: response,
             });
@@ -27,10 +26,13 @@ export class SetController {
     }
 
     static async storage(req: Request, res: Response) {
-        const { workoutId, exercises } = req.body;
+        const { workoutId, setExercisesIds } = req.body;
 
         try {
-            const exerciseIds: exerciseIdType[] = exercises;
+
+            const exercises = setExercisesIds.map((item:string) => {
+                return new ObjectId(item);
+            })
 
             const response = await SetRepository.create({
                 workoutId,
@@ -43,4 +45,6 @@ export class SetController {
             }
         }
     }
+
+    
 }
