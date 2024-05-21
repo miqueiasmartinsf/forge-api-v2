@@ -1,6 +1,13 @@
 import { Request, Response } from "express";
 import { MongoError } from "mongodb";
 import { SetRepository } from "../repositories/setRepository";
+import { ExerciseRepository } from "../repositories/exerciseRepository";
+import { Exercise } from "../models/Exercise";
+import { Types } from "mongoose";
+
+type exerciseIdType = {
+    exerciseId: string;
+};
 
 export class SetController {
     static async showByWorkoutId(req: Request, res: Response) {
@@ -23,9 +30,11 @@ export class SetController {
         const { workoutId, exercises } = req.body;
 
         try {
+            const exerciseIds: exerciseIdType[] = exercises;
+
             const response = await SetRepository.create({
                 workoutId,
-                exercises,
+                exercisesData: exercises,
             });
             res.status(200).json(response);
         } catch (error) {

@@ -12,6 +12,10 @@ export const exerciseSchema = new Schema({
     createdAt: { type: Date, default: Date.now, required: false },
 });
 
+export const exerciseIdSchema = new Schema({
+    
+})
+
 export type Exercise = InferSchemaType<typeof exerciseSchema>;
 
 export const ExerciseModel = mongoose.model<Exercise>("exercises",exerciseSchema);
