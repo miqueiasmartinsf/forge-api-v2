@@ -3,19 +3,22 @@ import { SetModel } from "../models/Set";
 
 export class SetRepository {
     static async findByWorkoutId(id: string) {
-        const res = await SetModel.findOne({ workoutId: id });
+        const res = await SetModel.findOne({ workoutId: id }).populate(
+            "exercisesData.exercise"
+        );
+        console.log(res);
         return res;
     }
 
     static async create(setData: Set) {
-        console.log(setData)
+        console.log(setData);
         const set = new SetModel(setData);
         console.log(set);
         const query = await set.save();
     }
 
-    static async deleteByWorkoutId(id:string){
-        const query = await SetModel.deleteMany({workoutId:id});
+    static async deleteByWorkoutId(id: string) {
+        const query = await SetModel.deleteMany({ workoutId: id });
         return query;
     }
 }

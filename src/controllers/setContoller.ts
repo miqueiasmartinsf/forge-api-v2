@@ -31,7 +31,7 @@ export class SetController {
         try {
 
             const exercises = setExercisesIds.map((item:string) => {
-                return new ObjectId(item);
+                return {exercise: new ObjectId(item)};
             })
 
             const response = await SetRepository.create({
