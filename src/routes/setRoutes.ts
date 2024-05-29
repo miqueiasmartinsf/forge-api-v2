@@ -8,3 +8,4 @@ router.use(verifyJWT);
 
 router.get("/sets/:id", SetController.showByWorkoutId);
 router.post("/sets", SetController.storage);
+router.patch("/sets/costumize/:id", SetController.updateSet)

@@ -12,7 +12,6 @@ type exerciseIdType = {
 export class SetController {
     static async showByWorkoutId(req: Request, res: Response) {
         const { id } = req.params;
-        console.log(`workoutID: ${id}`);
         try {
             const response = await SetRepository.findByWorkoutId(id);
             res.status(200).json({
@@ -29,10 +28,9 @@ export class SetController {
         const { workoutId, setExercisesIds } = req.body;
 
         try {
-
-            const exercises = setExercisesIds.map((item:string) => {
-                return {exercise: new ObjectId(item)};
-            })
+            const exercises = setExercisesIds.map((item: string) => {
+                return { exercise: new ObjectId(item) };
+            });
 
             const response = await SetRepository.create({
                 workoutId,
@@ -46,5 +44,16 @@ export class SetController {
         }
     }
 
-    
+    static async updateSet(req: Request, res: Response) {
+        const { id } = req.params;
+        const { exercisesData } = req.body;
+
+        try {
+            const response = await SetRepository.updateSet(id, exercisesData);
+        } catch (error) {
+            if (error instanceof MongoError) {
+                res.status(400).json(error.message);
+            }
+        }
+    }
 }
