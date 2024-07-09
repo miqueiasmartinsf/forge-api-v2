@@ -25,10 +25,9 @@ export class SetRepository {
     static async updateSet(id: string, exercisesData: any) {
         const res = await SetModel.findOneAndUpdate(
             { workoutId: id },
-            { $set: { "exercisesData": exercisesData } },
+            { $set: { exercisesData: exercisesData } },
             { new: true }
         );
-        console.log(res);
         return res;
     }
 }

@@ -5,7 +5,6 @@ import { UnauthorizedError } from "../errors/httpError";
 export const verifyJWT = (req: Request, res: Response, next: NextFunction) => {
     const privateKey = process.env.JWT_SECRET_KEY;
     const token = req.headers["authorization"] as string;
-    console.log(token);
     try {
         if (token) {
             jsonwebtoken.verify(token, <string>privateKey, (error, decoded) => {

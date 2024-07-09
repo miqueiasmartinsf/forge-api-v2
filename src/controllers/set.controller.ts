@@ -48,9 +48,11 @@ export class SetController {
         const { id } = req.params;
         const { exercisesData } = req.body;
 
+        console.log(exercisesData);
+
         try {
             const response = await SetRepository.updateSet(id, exercisesData);
-            res.status(200);
+            res.status(200).json({ message: "success" });
         } catch (error) {
             if (error instanceof MongoError) {
                 res.status(400).json(error.message);
