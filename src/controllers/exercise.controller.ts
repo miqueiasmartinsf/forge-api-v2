@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { ExerciseRepository } from "../repositories/exerciseRepository";
+import { ExerciseRepository } from "../repositories/exercise.repository";
 import { MongoError, ObjectId } from "mongodb";
 
 export class ExerciseController {

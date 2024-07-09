@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { MongoError, ObjectId } from "mongodb";
-import { SetRepository } from "../repositories/setRepository";
-import { ExerciseRepository } from "../repositories/exerciseRepository";
+import { SetRepository } from "../repositories/set.repository";
+import { ExerciseRepository } from "../repositories/exercise.repository";
 import { Exercise } from "../models/Exercise";
 import { Types } from "mongoose";
 
@@ -50,6 +50,7 @@ export class SetController {
 
         try {
             const response = await SetRepository.updateSet(id, exercisesData);
+            res.status(200);
         } catch (error) {
             if (error instanceof MongoError) {
                 res.status(400).json(error.message);

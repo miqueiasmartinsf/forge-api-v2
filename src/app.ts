@@ -1,11 +1,11 @@
 import express from "express";
 import cors from "cors";
 
-import { router as authRouter } from "./routes/authRoutes";
-import { router as exerciseRouter } from "./routes/exerciseRoutes";
-import { router as userRouter } from "./routes/userRoutes";
-import { router as workoutRoutes } from "./routes/WorkoutRoutes";
-import { router as setRoutes } from "./routes/setRoutes";
+import { router as authRouter } from "./routes/auth.routes";
+import { router as exerciseRouter } from "./routes/exercise.routes";
+import { router as userRouter } from "./routes/user.routes";
+import { router as workoutRoutes } from "./routes/workout.routes";
+import { router as setRoutes } from "./routes/set.routes";
 
 import { logger } from "./middlewares/logger";
 

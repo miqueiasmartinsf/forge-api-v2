@@ -1,6 +1,6 @@
 import express from "express";
 import { verifyJWT } from "../middlewares/verifyJWT";
-import { SetController } from "../controllers/setContoller";
+import { SetController } from "../controllers/set.controller";
 
 export const router = express.Router();
 

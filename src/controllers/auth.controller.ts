@@ -1,8 +1,8 @@
 import { Request, Response } from "express";
 import { emailValidator } from "../utils/emailValidator";
 import { MongoError } from "mongodb";
-import { authRepository } from "../repositories/authRepository";
-import { UserRepository } from "../repositories/userRepository";
+import { authRepository } from "../repositories/auth.repository";
+import { UserRepository } from "../repositories/user.repository";
 import bcrypt from "bcrypt";
 import { User } from "../models/User";
 import jsonwebtoken from "jsonwebtoken";
@@ -21,12 +21,7 @@ export class AuthController {
             const userData = await UserRepository.findByUserByEmail(email);
 
             if (userData && userData.password) {
-                const passwordVerify = await bcrypt.compare(
-                    password,
-                    userData.password
-                );
-
-                if (passwordVerify === true) {
+                if (bcrypt.compareSync(password, userData.password)) {
                     const privateKey = process.env.JWT_SECRET_KEY;
                     const id = userData._id;
                     const token = jsonwebtoken.sign({ id }, `${privateKey}`);

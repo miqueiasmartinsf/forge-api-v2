@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import jsonwebtoken from "jsonwebtoken";
 import { JwtPayload } from "jsonwebtoken";
-import { UserRepository } from "../repositories/userRepository";
+import { UserRepository } from "../repositories/user.repository";
 import { MongoError } from "mongodb";
 
 export class UserController {

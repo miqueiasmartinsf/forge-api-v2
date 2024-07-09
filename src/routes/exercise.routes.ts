@@ -1,6 +1,6 @@
 import express from "express";
 
-import { ExerciseController } from "../controllers/exerciseController";
+import { ExerciseController } from "../controllers/exercise.controller";
 
 export const router = express.Router();
 
